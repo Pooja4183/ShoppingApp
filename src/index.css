@@ -1,3 +1,8 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,3 +16,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.react-slideshow-container .nav {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  color: white !important;  
+  transform: scaleX(0.7);
+}
+
+.react-slideshow-container .nav:hover {
+  background: rgba(203, 205, 205, 0.2) !important; 
+}
+

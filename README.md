@@ -68,3 +68,33 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+How to Prevent This in the Future
+After config/CSS changes, always stop and restart the dev server:
+
+Ctrl + C  (to stop)
+npm start (to restart)
+If anything looks off:
+
+Delete .cache using:
+Remove-Item -Recurse -Force "node_modules/.cache"
+
+✅ Your Question:
+“Do I need to use fetch again and again in every component when I'm listing products based on different conditions?”
+
+✅ Short Answer:
+No, you don’t have to fetch the same data again and again.
+You can fetch once and share that data across multiple components using:
+
+useContext (for small to medium apps)
+
+Redux (for large-scale state sharing + dev tools)
+
+🔗 Core Redux Concepts
+Concept	Description
+Store	A single JS object that holds all your app's state
+Actions	Plain JS objects describing what happened
+Reducers	Pure functions that decide how state should change based on actions
+Dispatch	A method to send actions to the store
+Selectors	Functions to read state from the store
