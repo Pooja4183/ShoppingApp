@@ -40,6 +40,7 @@ const Slideshow = () => {
             <div style={{ ...divStyle, backgroundImage: `url(${slideImage.url})` }}></div>
           </div>
         ))}
+        
       </Slide>
     </div>
   );
