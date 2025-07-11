@@ -1,10 +1,13 @@
 import "./CartPage.css";
-import { useContext } from "react";
-import {myContext} from "../MainApp"
+import {incrementQuantity,decrementQuantity,removeFromCart} from "../Redux/actions/cartActions"
+import {useDispatch,useSelector} from 'react-redux'
+import Footer from "./Footer";
 
 const CartPage = () => {
 
-const {cartItems,onIncrease,onDecrease,onRemove ,totalPrice} = useContext(myContext);
+const dispatch = useDispatch();
+const cartItems = useSelector((state)=>state.cart.cartProduct);
+const totalPrice = useSelector((state)=>state.cart.totalPrice)
 
   return (
     <>
@@ -18,14 +21,14 @@ const {cartItems,onIncrease,onDecrease,onRemove ,totalPrice} = useContext(myCont
                 <h4>{item.title}</h4>
                 <p>Price: {item.price}</p>
                 <div className="quantity-controls">
-                  <button className="qty-btn"  onClick={() => onDecrease(item.id)} >
+                  <button className="qty-btn" onClick={()=>dispatch(decrementQuantity(item.id))}>
                     -
                   </button>
                   <span>{item.quantity}</span>
-                  <button className="qty-btn"  onClick={() => onIncrease(item.id)}>+</button>
+                  <button className="qty-btn" onClick={()=>dispatch(incrementQuantity(item.id))}>+</button>
                 </div>
               </div>
-              <button className="remove-btn" onClick={() => onRemove(item.id)}>Remove</button>
+              <button className="remove-btn" onClick={()=>dispatch(removeFromCart(item.id))}>Remove</button>
             </div>
           ))}
         </div>
@@ -35,6 +38,7 @@ const {cartItems,onIncrease,onDecrease,onRemove ,totalPrice} = useContext(myCont
           <button className="checkout-btn">Proceed to Checkout</button>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

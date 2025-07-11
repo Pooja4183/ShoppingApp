@@ -1,41 +1,23 @@
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingBag } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function AddToCart({cartItems}) {
+function AddToCart() {
+  const addToCartItems = useSelector((state) => state.cart.cartProduct);
+
   return (
-    <>
     <Link
       to="/cart"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        textDecoration: "none",
-        color: "#333",
-        fontWeight: "bold",
-        position: "relative",
-        padding: "0 10px",
-      }}
+      className="flex flex-col items-center relative text-xs font-medium text-black"
     >
-      <FaShoppingCart size={22} />
-      <span style={{ marginLeft: "5px" }}>Cart</span>
-      <span
-        style={{
-          position: "absolute",
-          top: "-6px",
-          right: "0px",
-          backgroundColor: "red",
-          color: "white",
-          borderRadius: "50%",
-          padding: "2px 6px",
-          fontSize: "11px",
-        }}
-      >
-       {cartItems.reduce((total, item) => total + item.quantity, 0)}
-      </span>
+      <FaShoppingBag size={18} className="hover:text-pink-600" />
+      Bag
+      {addToCartItems.reduce((total, item) => total + item.quantity, 0) > 0 && (
+        <span className="absolute -top-1 right-0 bg-red-600 text-white text-[10px] px-1 rounded-full">
+          {addToCartItems.reduce((total, item) => total + item.quantity, 0)}
+        </span>
+      )}
     </Link>
-  
-    </>
-    
   );
 }
 

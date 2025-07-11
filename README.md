@@ -98,3 +98,85 @@ Actions	Plain JS objects describing what happened
 Reducers	Pure functions that decide how state should change based on actions
 Dispatch	A method to send actions to the store
 Selectors	Functions to read state from the store
+
+What is Middleware in Redux?
+Middleware is like a middleman between your action and the reducer.
+
+When you dispatch an action in Redux:
+
+dispatch(action) ➜ Middleware ➜ Reducer ➜ Store
+
+----------------------------------------------------
+✅ Redux Core Concepts:
+By using Redux with Saga, you're still covering:
+
+Store – global state container
+
+Actions – to describe what happened
+
+Reducers – to describe how the state changes
+
+Dispatch() – to send actions
+
+Selectors – to read state from the store
+
+✅ You write reducers, create the store, and structure the state — all standard Redux.
+
+🧠 Where Saga Comes In:
+Redux doesn’t manage side effects (like API calls) by itself.
+
+You need middleware for that.
+
+Without middleware: API logic goes directly inside components or thunks.
+
+With Saga: You separate that logic into saga files, which is cleaner for scalable apps.
+
+So Redux-Saga is an advanced way to manage side-effects, not a replacement but an enhancement.
+
+
+Component 👉 dispatch(action)
+            ↓
+     🔁 Middleware (Saga) [INTERCEPTS HERE]
+            ↓
+      If matched → runs saga logic
+            ↓
+       Saga dispatches SUCCESS/FAILURE
+            ↓
+          Reducer
+            ↓
+          Store updated
+            ↓
+         UI re-renders
+Component  →  dispatch(action)
+             ↓
+        Middleware (Saga watches)
+             ↓
+        Saga runs async task (API call)
+             ↓
+        Saga dispatches SUCCESS/FAILURE
+             ↓
+        Reducer receives that → updates store
+             ↓
+        Component uses useSelector() to get state
+
+        --------------------------------------------------
+
+        🧾 Action File (just defines action functions/constants)
+       ↓
+🧩 Component (dispatches action using helper from action file)
+       ↓
+🏪 Store (receives the action object via dispatch)
+       ↓
+🧵 Middleware (Saga checks if it should handle this action)
+       ↓
+🔥 Saga (does API call, etc., then dispatches a new action)
+       ↓
+🧠 Reducer (receives the final result action, updates state)
+       ↓
+📦 Store (now holds the updated state)
+       ↓
+🔍 Component (reads state using useSelector)
+
+
+
+
