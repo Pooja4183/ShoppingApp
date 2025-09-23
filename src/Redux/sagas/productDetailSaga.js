@@ -6,7 +6,7 @@ function* fetchProductIdSaga(action) {
     try {
 
         const response = yield call(() =>
-            fetch(`https://fakestoreapi.com/products/${action.payload}`));
+            fetch(`http://localhost:5000/api/products/${action.payload}`));
         const data = yield response.json();
         yield put(fetchProductIdSuccess(data));
 

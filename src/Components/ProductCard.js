@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductRequest } from "../Redux/actions/productActions";
+import { fetchProductRequest } from "../Redux/actions/productFetchActions";
 
 const ProductCard = () => {
   const [hoveredId, setHoveredId] = useState(null);
@@ -29,34 +29,37 @@ const ProductCard = () => {
         <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {products.map((item) => (
             <div
-              key={item.id}
+              key={item._id}
               className="bg-white cursor-pointer rounded-xl shadow hover:shadow-md transition relative"
-              onClick={() => navigate("/Prodectdetails/" + item.id)}
+              onClick={() => navigate("/Prodectdetails/" + item._id)}
               onMouseEnter={() => setHoveredId(item.id)}
               onMouseLeave={() => setHoveredId(null)}
             >
               {/* Wishlist Icon on Hover */}
-              {hoveredId === item.id && (
+              {hoveredId === item._id && (
                 <div className="absolute top-2 right-2 text-lg text-gray-500 hover:text-red-500 z-10">
                   ♥
                 </div>
               )}
-
               <figure className="flex justify-center items-center h-48 overflow-hidden rounded-t-xl">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="h-full object-contain"
-                />
+                {item.images.length > 0 ? (
+                  <img
+                    src={item.images[0].url}
+                    alt={item.images[0].original}
+                    className="h-full object-contain"
+                  />
+                ) : (
+                  <span className="text-gray-400">No image</span>
+                )}
               </figure>
 
               <div className="px-3 mt-2 text-left">
                 <div className="flex items-center text-gray-600 text-xs pb-1 space-x-1">
                   <span className="bg-green-600 text-white px-1 rounded text-[11px] font-bold flex items-center gap-0.5">
-                    {item.rating.rate} ★
+                    {/* {item.rating.rate} ★ */}
                   </span>
                   <span className="text-gray-500 text-[11px]">
-                    | {item.rating.count}
+                    {/* | {item.rating.count} */}
                   </span>
                 </div>
 

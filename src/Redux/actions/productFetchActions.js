@@ -1,11 +1,6 @@
-// Product Action type
-
-export const FETCH_PRODUCT_REQUEST = "FETCH_PRODUCT_REQUEST";
-export const FETCH_PRODUCT_SUCCESS = "FETCH_PRODUCT_SUCCESS";
-export const FETCH_PRODUCT_FAILURE = "FETCH_PRODUCT_FAILURE";
+import {FETCH_PRODUCT_REQUEST,FETCH_PRODUCT_SUCCESS,FETCH_PRODUCT_FAILURE} from './types'
 
 //Action creators
-
 export const fetchProductRequest =()=>({
     type:  FETCH_PRODUCT_REQUEST,
 });

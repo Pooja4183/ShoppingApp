@@ -1,21 +1,21 @@
 import { Routes, Route, Link, Navigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "./contexts/AuthContext";
-
 import AppLogo from "./Components/AppLogo";
-import Home from "./Home";
-import LoginUser from "./LearningComp/Local_storage_getValue";
-import Localstorage from "./LearningComp/Local_storage_setValue";
-import ProductCard from "./Components/ProductCard";
+import Home from "./Pages/Home";
 import ProductDetail from "./Components/ProductDetail";
 import AddToCart from "./Components/AddtoCart";
 import CartPage from "./Components/CartPage";
 import WishListPage from "./Components/WishListPage";
 import AddToWishlistHeader from "./Components/AddToWishlistHeader";
 import ProfileHeader from "./Components/ProfileHeader";
+import WomenProducts from "./Pages/WomenProducts";
+import Profile from "./Pages/Profile";
+import AuthForm from "./Pages/AuthForm";
+import { useSelector } from "react-redux";
+import VerifyOtp from "./Pages/VerifyOtp";
+import AdminProductForm from "./Pages/AdminProductForm";
 
 function MainApp() {
-  const { isLoggedIn } = useContext(AuthContext);
+  const isAuthenticated = useSelector((state)=>state.auth.isAuthenticated)
 
   return (
     <>
@@ -27,25 +27,25 @@ function MainApp() {
             <AppLogo />
           </Link>
           <Link
-            to="/product"
+            to="/women"
             className="text-sm font-medium hover:text-pink-500"
           >
             WOMEN
           </Link>
           <Link
-            to="/product"
+            to="/men"
             className="text-sm font-medium hover:text-pink-500"
           >
             MEN
           </Link>
           <Link
-            to="/product"
+            to="/home-decore"
             className="text-sm font-medium hover:text-pink-500"
           >
             HOME DECORE
           </Link>
           <Link
-            to="/product"
+            to="/beauty"
             className="text-sm font-medium hover:text-pink-500"
           >
             BEAUTY
@@ -80,30 +80,34 @@ function MainApp() {
         
         {/* Right: Profile + Wishlist + Cart */}
         <div className="navbar-end gap-6 text-xs font-medium text-black">
-          {isLoggedIn && <ProfileHeader />}
-          {isLoggedIn && <AddToWishlistHeader />}
-          {isLoggedIn && <AddToCart />}
+          <ProfileHeader />
+          <AddToWishlistHeader  isAuthenticated={isAuthenticated}/>
+          <AddToCart />
         </div>
       </nav>
 
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/product" element={<ProductCard />} />
+        {/* <Route path="/product" element={<ProductCard />} /> */}
+         <Route path="/women" element={<WomenProducts />} />
         <Route
           path="/Prodectdetails/:id"
-          element={<ProductDetail isLoggedIn={isLoggedIn} />}
+          element={<ProductDetail isAuthenticated={isAuthenticated} />}
         />
-        <Route path="/signup" element={<Localstorage />} />
-        <Route path="/login" element={<LoginUser />} />
+         <Route path="/verify-otp" element={<VerifyOtp/>}/>
+        <Route path="/login" element={<AuthForm mode="login" />} />
+       <Route path="/signup" element={<AuthForm mode="signup" />} />
+         <Route path="/contact-us" element={<Profile />} />
         <Route
           path="/wishlist"
-          element={isLoggedIn ? <WishListPage /> : <Navigate to="/login" />}
+          element={isAuthenticated ? <WishListPage /> : <Navigate to="/login" />}
         />
         <Route
           path="/cart"
-          element={isLoggedIn ? <CartPage /> : <Navigate to="/login" />}
+          element={<CartPage/>}
         />
+        <Route path="admin-form" element={<AdminProductForm/>}/>
       </Routes>
     </>
   );
