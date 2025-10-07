@@ -1,0 +1,44 @@
+// Auth Actions types
+export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const SIGNUP_FAIL = 'SIGNUP_FAIL';
+
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT = 'LOGOUT';
+
+// Otp verification types
+export const SEND_OTP_REQUEST = 'SEND_OTP_REQUEST';
+export const SEND_OTP_SUCCESS = 'SEND_OTP_SUCCESS';
+export const SEND_OTP_FAIL = 'SEND_OTP_FAIL';
+
+// verify otp types
+export const VERIFY_OTP_REQUEST = 'VERIFY_OTP_REQUEST';
+export const VERIFY_OTP_SUCCESS = 'VERIFY_OTP_SUCCESS';
+export const VERIFY_OTP_FAIL = 'VERIFY_OTP_FAIL';
+
+// otp constant
+export const RESET_OTP = "RESET_OTP"; 
+
+// Product Action type=
+export const FETCH_PRODUCT_REQUEST = "FETCH_PRODUCT_REQUEST";
+export const FETCH_PRODUCT_SUCCESS = "FETCH_PRODUCT_SUCCESS";
+export const FETCH_PRODUCT_FAILURE = "FETCH_PRODUCT_FAILURE";
+
+export const UPLOAD_PRODUCT_REQUEST = "UPLOAD_PRODUCT_REQUEST";
+export const UPLOAD_PRODUCT_SUCCESS = "UPLOAD_PRODUCT_SUCCESS";
+export const UPLOAD_PRODUCT_FAILURE = "UPLOAD_PRODUCT_FAILURE";
+
+// Search Product Action types
+
+export const SEARCH_PRODUCT_REQUEST = "SEARCH_PRODUCT_REQUEST";
+export const SEARCH_PRODUCT_SUCCESS = "SEARCH_PRODUCT_SUCCESS";
+export const SEARCH_PRODUCT_FAILURE = "SEARCH_PRODUCT_FAILURE";
+
+
+
+
+
+
+

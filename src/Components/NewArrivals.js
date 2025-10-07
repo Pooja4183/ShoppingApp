@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchProductRequest } from "../Redux/actions/productActions";
+import { fetchProductRequest } from "../Redux/actions/productFetchActions";
 
 const NewArrivals = () => {
 const { products } = useSelector((state) => state.products);
@@ -19,9 +19,9 @@ const { products } = useSelector((state) => state.products);
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-6">
         {products.slice(0, 6).map((item) => (
           <div
-            key={item.id}
+            key={item._id}
             className="bg-white cursor-pointer rounded-xl"
-            onClick={() => navigate("/Prodectdetails/" + item.id)}
+            onClick={() => navigate("/Prodectdetails/" + item._id)}
           >
             <figure className="flex justify-center items-center h-48 overflow-hidden rounded-t-xl">
               <img
@@ -32,7 +32,7 @@ const { products } = useSelector((state) => state.products);
             </figure>
 
             <div className="px-3 mt-2 text-left">
-              <p className="text-gray-600 text-xs pb-1"> {item.rating.rate} ★ |</p>
+              {/* <p className="text-gray-600 text-xs pb-1"> {item.rating.rate} ★ |</p> */}
               <h2 className="card-title text-sm line-clamp-2 mb-2 min-h-[2em]">
                 {item.title}
               </h2>

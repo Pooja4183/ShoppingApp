@@ -1,23 +1,21 @@
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 function LoginUser() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const nameref = useRef();
-  const attemptRef = useRef(0)
+  const attemptRef = useRef(0);
   const [signupData, SetData] = useState({
     email: "",
     pass: "",
   });
 
+  const {login} = useContext(AuthContext)
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("signupData"));
-    if (data?.is_loggedin === true) {
-      navigate("/"); // Redirect to home if alredy logged in
-    }
-    nameref.current.focus();
-  },[navigate]);
+ 
+    nameref.current.focus(); // Keep focusing on input field for better UX
+  }, []);
 
   const getValue = (event) => {
     const { name, value } = event.target;
@@ -26,6 +24,7 @@ function LoginUser() {
       [name]: value,
     }));
   };
+
   const clickbutton = () => {
     const ParsedData = JSON.parse(localStorage.getItem("signupData"));
 
@@ -35,16 +34,27 @@ function LoginUser() {
       ParsedData.pass === signupData.pass
     ) {
       alert("login success");
-      localStorage.setItem("signupData",JSON.stringify({...ParsedData, is_loggedin: true}))
-      navigate("/");
+
+      login(ParsedData);
+      navigate('/');
+      
+
+      // ✅ Login success 
+      localStorage.setItem(
+        "signupData",
+        JSON.stringify({ ...ParsedData, is_loggedin: true })
+      );
+
+      navigate("/"); // ✅ Redirect after login
     } else {
-      attemptRef.current+= 1;
+      attemptRef.current += 1;
       alert(`login failed (${attemptRef.current} attempts)`);
     }
   };
 
   return (
     <>
+    
       <div style={{ padding: "10%" }}>
         <h1>Login</h1>
         email :
@@ -68,7 +78,17 @@ function LoginUser() {
           onChange={getValue}
         />
         <input type="button" onClick={clickbutton} value="Login" />
+        <p>
+  Don't have an account?{" "}
+  <span
+    style={{ color: "blue", textDecoration: "underline", cursor: "pointer" }}
+    onClick={() => navigate("/signup")}
+  >
+    Create Account
+  </span>
+</p>
       </div>
+      
     </>
   );
 }

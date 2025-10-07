@@ -34,18 +34,7 @@ navigate("/")
       [name]: value,
     }));
   };
-  // const clickbutton = () => {
-  //   console.log(`
-  //     Name: ${signupData.name}
-  //     email: ${signupData.email}
-  //     password: ${signupData.pass} `);
-  //   localStorage.setItem("signupData", JSON.stringify(signupData));
-
-  //   if (signupData.is_loggedin) {
-  //     console.log("testing isloggedin condition");
-  //     navigate("/login");
-  //   } else navigate("/signup");
-  // };
+  
   const clickbutton = () => {
   console.log(`
     Name: ${signupData.name}

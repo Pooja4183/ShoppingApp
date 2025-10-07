@@ -1,28 +1,39 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductIdRequest } from "../Redux/actions/productDetailAction";
 import { addToCart } from "../Redux/actions/cartActions";
 import { addToWishlist } from "../Redux/actions/wishListAction";
 
-function ProductDetail({ isLoggedIn }) {
+function ProductDetail({ isAuthenticated }) {
   const { id } = useParams();
   const [wishListmessage, setWishlistmessage] = useState("");
+  const [cartMessage, setCartmessage] = useState("");
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
+  
   const productData = useSelector((state) => state.product.product);
-  const wishListItems = useSelector((state)=>state.wishList.wishListItmes);
+  const wishListItems = useSelector((state) => state.wishList.wishListItmes);
 
-  const handleWishlist = ()=>{
-    const isAlreadywishlist = wishListItems.some((item)=>item.id===productData.id);
-    if(isAlreadywishlist){
- setWishlistmessage("Already in wishlist");
-    }else{
-       dispatch(addToWishlist(productData));
-       setWishlistmessage("Added to wishlist!");
-  }
-    setTimeout(() => setWishlistmessage(""),2000)};
+  const handleWishlist = () => {
+    const isAlreadywishlist = wishListItems.some(
+      (item) => item.id === productData.id
+    );
+    if (isAuthenticated) {
+      if (isAlreadywishlist) {
+        setWishlistmessage("Already in wishlist");
+      } else {
+        dispatch(addToWishlist(productData));
+        setWishlistmessage("Added to wishlist!");
+      }
+      setTimeout(() => setWishlistmessage(""), 2000);
+    } else {
+      console.log("hello");
+      navigate("/login");
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchProductIdRequest(id));
@@ -42,11 +53,18 @@ function ProductDetail({ isLoggedIn }) {
       >
         {/* Product Image */}
         <div style={{ flex: 1 }}>
+          {productData?.images?.length > 0 && (
           <img
-            src={productData.image}
+            src={productData.images[0].url}
             alt={productData.title}
             style={{ width: "100%", borderRadius: "8px" }}
           />
+          /* <img
+            src={productData.images[1].url}
+            alt={productData.title}
+            style={{ width: "100%", borderRadius: "8px" }}
+          /> */
+          )}
         </div>
 
         {/* Product Details */}
@@ -70,6 +88,17 @@ function ProductDetail({ isLoggedIn }) {
           <p style={{ color: "green", marginBottom: "20px" }}>
             Inclusive of all taxes
           </p>
+          {cartMessage && (
+            <p
+              style={{
+                color: "green",
+                fontWeight: "500",
+                margin: 0,
+              }}
+            >
+              {cartMessage}
+            </p>
+          )}
 
           {/* ✅ Wrap both buttons + message inside a flex div */}
           <div
@@ -81,7 +110,11 @@ function ProductDetail({ isLoggedIn }) {
             }}
           >
             <button
-              onClick={() => dispatch(addToCart(productData))}
+              onClick={() => {
+                dispatch(addToCart(productData));
+                setCartmessage("Added to cart!");
+                setTimeout(() => setCartmessage(""), 2000);
+              }}
               style={{
                 padding: "10px 20px",
                 backgroundColor: "#ff3e6c",
