@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchProductRequest } from "../Redux/actions/productFetchActions";
 
-const ProductCard = () => {
+const ProductListing = ({searchProduct= []}) => {
   const [hoveredId, setHoveredId] = useState(null);
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.products);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +26,7 @@ const ProductCard = () => {
 
         {/* Product grid - 5 columns on xl screens */}
         <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {products.map((item) => (
+          {searchProduct.map((item) => (
             <div
               key={item._id}
               className="bg-white cursor-pointer rounded-xl shadow hover:shadow-md transition relative"
@@ -87,4 +86,4 @@ const ProductCard = () => {
   );
 };
 
-export default ProductCard;
+export default ProductListing;

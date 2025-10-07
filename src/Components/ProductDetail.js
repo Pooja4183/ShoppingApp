@@ -13,6 +13,7 @@ function ProductDetail({ isAuthenticated }) {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+  
   const productData = useSelector((state) => state.product.product);
   const wishListItems = useSelector((state) => state.wishList.wishListItmes);
 
