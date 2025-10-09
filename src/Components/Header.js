@@ -10,7 +10,7 @@ import useDebounce from "../CustomHooks.js/useDebounce";
 
 function Header() {
   const [query, setQuery] = useState("");
-  const [showDropDown, setshowDropDown] = useState(false)
+  const [showDropDown, setshowDropDown] = useState(false);
   const debouncedInputValue = useDebounce(query, 300);
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -18,17 +18,17 @@ function Header() {
     (state) => state.searchResult.searchResult || []
   );
 
-  console.log('search list',searchResult)
+  console.log("search list", searchResult);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (debouncedInputValue) {
       dispatch(searchProductRequest(debouncedInputValue)); // Fetch suggestions based on the query
-      setshowDropDown(true)
-    }  else {
-    setshowDropDown(false) // clear suggestions
-  }
+      setshowDropDown(true);
+    } else {
+      setshowDropDown(false); // clear suggestions
+    }
   }, [debouncedInputValue, dispatch]);
 
   const handleSearch = (e) => {
@@ -36,19 +36,19 @@ function Header() {
     setQuery(value);
   };
 
-  const handleKeydown = (e)=>{
-    if(e.key === 'Enter'){
+  const handleKeydown = (e) => {
+    if (e.key === "Enter") {
       e.preventDefault();
-    
+
       navigate(`/products?search=${encodeURIComponent(query)}`);
       setshowDropDown(false);
     }
   };
 
-  const handleSuggestionClick = (item)=>{
+  const handleSuggestionClick = (item) => {
     navigate(`/products?search=${encodeURIComponent(item.title)}`);
     setshowDropDown(false);
-  }
+  };
 
   return (
     <>
@@ -58,20 +58,20 @@ function Header() {
           <Link to="/" className="mr-4">
             <AppLogo />
           </Link>
-          <Link to="/women" className="text-sm font-medium hover:text-pink-500">
+          <Link to="category/women" className="text-sm font-medium hover:text-pink-500">
             WOMEN
           </Link>
-          <Link to="/men" className="text-sm font-medium hover:text-pink-500">
+          <Link to="category/men" className="text-sm font-medium hover:text-pink-500">
             MEN
           </Link>
           <Link
-            to="/home-decore"
+            to="category/home-decore"
             className="text-sm font-medium hover:text-pink-500"
           >
             HOME DECORE
           </Link>
           <Link
-            to="/beauty"
+            to="category/beauty"
             className="text-sm font-medium hover:text-pink-500"
           >
             BEAUTY
@@ -79,60 +79,56 @@ function Header() {
         </div>
 
         {/* Center: Search Bar with icon */}
-        
+
         <div className="navbar-center w-[30%] relative">
+          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-4.35-4.35m1.35-5.65a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </span>
 
-  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-4 w-4"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M21 21l-4.35-4.35m1.35-5.65a7 7 0 11-14 0 7 7 0 0114 0z"
-      />
-    </svg>
-  </span>
+          {/* Input */}
+          <input
+            onChange={handleSearch}
+            value={query}
+            onKeyDown={handleKeydown}
+            type="search"
+            placeholder="Search for products, brands and more"
+            className="w-full text-sm pl-10 pr-4 py-2 rounded bg-gray-100 focus:bg-white focus:outline-none border border-transparent focus:border-gray-300 transition relative z-10"
+          />
 
-  {/* Input */}
-  <input
-    onChange={handleSearch}
-    value={query}
-    onKeyDown={handleKeydown}
-    type="search"
-    placeholder="Search for products, brands and more"
-    className="w-full text-sm pl-10 pr-4 py-2 rounded bg-gray-100 focus:bg-white focus:outline-none border border-transparent focus:border-gray-300 transition relative z-10"
-  />
-
-  {/* Search Results Dropdown */}
-  {showDropDown && searchResult.length > 0 && (
-    <ul className="absolute top-full left-0 z-20 w-full mt-1 max-h-64 overflow-y-auto bg-white border border-gray-300 rounded shadow-lg">
-      {searchResult.map((item) => (
-        <li
-          key={item._id}
-          onClick={()=> handleSuggestionClick(item)}
-          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-        >
-          {item.title}
-        </li>
-      ))}
-    </ul>
-   
-  )}
-</div>
-
+          {/* Search Results Dropdown */}
+          {showDropDown && searchResult.length > 0 && (
+            <ul className="absolute top-full left-0 z-20 w-full mt-1 max-h-64 overflow-y-auto bg-white border border-gray-300 rounded shadow-lg">
+              {searchResult.map((item) => (
+                <li
+                  key={item._id}
+                  onClick={() => handleSuggestionClick(item)}
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                >
+                  {item.title}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
         {/* Right: Profile + Wishlist + Cart */}
         <div className="navbar-end gap-6 text-xs font-medium text-black">
           <ProfileHeader />
           <AddToWishlistHeader isAuthenticated={isAuthenticated} />
           <AddToCart />
-        
         </div>
       </nav>
     </>
