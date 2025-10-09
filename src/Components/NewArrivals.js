@@ -24,11 +24,16 @@ const { products } = useSelector((state) => state.products);
             onClick={() => navigate("/Prodectdetails/" + item._id)}
           >
             <figure className="flex justify-center items-center h-48 overflow-hidden rounded-t-xl">
+              {item.images?.length > 0 ? (
               <img
-                src={item.image}
+                src={item.images[0]?.url}
                 alt={item.title}
                 className="h-full object-contain"
               />
+            ) : (
+              <span className="text-gray-400">No image</span>
+            )}
+             
             </figure>
 
             <div className="px-3 mt-2 text-left">

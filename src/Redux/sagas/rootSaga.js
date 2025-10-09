@@ -5,6 +5,7 @@ import watchAuthSaga from './authSaga';
 import watchOtpSaga from './otpSaga';
 import upload_ProductSaga from './productUploadSaga';
 import searchProductWatcher from './searchProductSaga';
+import fetchCategoryWatcher from './categorySaga';
 
 export default function* rootSaga(){
     yield all([ 
@@ -14,5 +15,6 @@ export default function* rootSaga(){
         watchOtpSaga(),
         upload_ProductSaga(),
         searchProductWatcher(),
+        fetchCategoryWatcher(),
     ]);
 }

@@ -3,14 +3,13 @@ import Home from "./Pages/Home";
 import ProductDetail from "./Components/ProductDetail";
 import CartPage from "./Components/CartPage";
 import WishListPage from "./Components/WishListPage";
-import WomenProducts from "./Pages/WomenProducts";
 import Profile from "./Pages/Profile";
 import AuthForm from "./Pages/AuthForm";
 import { useSelector } from "react-redux";
 import VerifyOtp from "./Pages/VerifyOtp";
 import AdminProductForm from "./Pages/AdminProductForm";
 import Header from "./Components/Header";
-import ProductPage from "./Pages/ProductPage";
+import ProductDashboard from "./Pages/ProductDashboard";
 
 function MainApp() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -22,8 +21,10 @@ function MainApp() {
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<ProductPage />} />
-        <Route path="/women" element={<WomenProducts />} />
+        <Route path="/products" element={<ProductDashboard />} />
+         <Route path="/search" element={<ProductDashboard />} />
+        <Route path="/category/:categoryName" element={<ProductDashboard />} />
+       
         <Route
           path="/Prodectdetails/:id"
           element={<ProductDetail isAuthenticated={isAuthenticated} />}
