@@ -7,6 +7,8 @@ import authReducer from './authReducer';
 import OtpReducer from './OtpReducer';
 import searchProductReducer from './searchProductReducer';
 import fetchCategoryReducer from './categoryReducer'
+import filterCategoryReducer from './filterCategoryReducer';
+import sidebarFiltersReducer from './sidebarFiltersReducer';
 
 const rootReducer =combineReducers({
     products:productReducer, // this becomes state.prodcuts
@@ -16,7 +18,10 @@ const rootReducer =combineReducers({
     auth:authReducer,
     otp:OtpReducer,
     searchResult:searchProductReducer,
-    categoryList:fetchCategoryReducer,
+    categoryListProduct:fetchCategoryReducer,
+    filterdProduct:filterCategoryReducer,
+    filtersList:sidebarFiltersReducer,
+    
 
 
 });

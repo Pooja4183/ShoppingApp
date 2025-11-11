@@ -1,7 +1,7 @@
 import {
  FETCH_CATEGORY_REQUEST,
  FETCH_CATEGORY_SUCCESS,
- FETCH_CATEGORY_FAILURE
+ FETCH_CATEGORY_FAILURE,
 } from "./types";
 
 // Request: user clicks on category (men, women, kids etc)

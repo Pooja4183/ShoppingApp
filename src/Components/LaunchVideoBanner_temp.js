@@ -1,4 +1,4 @@
-// import launchVideo from "./Beautiful.mp4"; // Adjust the path if needed
+ import launchVideo from "./videos/Beautiful.mp4"; 
 
 const LaunchVideoBanner = () => {
   return (
@@ -23,7 +23,7 @@ const LaunchVideoBanner = () => {
           playsInline
         >
           <source
-            src="https://drive.google.com/uc?export=download&id=1hRuR-kM9ImBcMsLKWe9weE7IWONrhFIm"
+            src={launchVideo}
             type="video/mp4"
           />
           Your browser does not support the video tag.

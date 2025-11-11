@@ -5,6 +5,7 @@ import { fetchProductRequest } from "../Redux/actions/productFetchActions";
 
 const NewArrivals = () => {
 const { products } = useSelector((state) => state.products);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
