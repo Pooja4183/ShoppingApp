@@ -5,13 +5,18 @@ import {
   fetchCategoryFailure,
 } from "../actions/categoryAction";
 
-function* fetchCategorySaga(action){
+// import useFetch from "../../CustomHooks.js/useFetch"; 
+
+function* fetchCategorySaga(action) {
   try {
-    const response = yield call(() => 
-      fetch(`http://localhost:5000/api/app-category/${action.payload}`)
+    const  categoryName  = action.payload; // destructure payload
+
+    const response = yield call(() =>
+      // useFetch(`app-category/${categoryName}`)
+      fetch(`http://localhost:5000/api/app-category/${categoryName}`)
     );
     const data = yield response.json();
-    console.log('category list Saga', data)
+
     yield put(fetchCategorySuccess(data.data));
   } catch (error) {
     yield put(fetchCategoryFailure(error.message));

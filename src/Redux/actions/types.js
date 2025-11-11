@@ -1,25 +1,25 @@
 // Auth Actions types
-export const SIGNUP_REQUEST = 'SIGNUP_REQUEST';
-export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
-export const SIGNUP_FAIL = 'SIGNUP_FAIL';
+export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
+export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+export const SIGNUP_FAIL = "SIGNUP_FAIL";
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAIL = 'LOGIN_FAIL';
-export const LOGOUT = 'LOGOUT';
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGOUT = "LOGOUT";
 
 // Otp verification types
-export const SEND_OTP_REQUEST = 'SEND_OTP_REQUEST';
-export const SEND_OTP_SUCCESS = 'SEND_OTP_SUCCESS';
-export const SEND_OTP_FAIL = 'SEND_OTP_FAIL';
+export const SEND_OTP_REQUEST = "SEND_OTP_REQUEST";
+export const SEND_OTP_SUCCESS = "SEND_OTP_SUCCESS";
+export const SEND_OTP_FAIL = "SEND_OTP_FAIL";
 
 // verify otp types
-export const VERIFY_OTP_REQUEST = 'VERIFY_OTP_REQUEST';
-export const VERIFY_OTP_SUCCESS = 'VERIFY_OTP_SUCCESS';
-export const VERIFY_OTP_FAIL = 'VERIFY_OTP_FAIL';
+export const VERIFY_OTP_REQUEST = "VERIFY_OTP_REQUEST";
+export const VERIFY_OTP_SUCCESS = "VERIFY_OTP_SUCCESS";
+export const VERIFY_OTP_FAIL = "VERIFY_OTP_FAIL";
 
 // otp constant
-export const RESET_OTP = "RESET_OTP"; 
+export const RESET_OTP = "RESET_OTP";
 
 // Product Action type=
 export const FETCH_PRODUCT_REQUEST = "FETCH_PRODUCT_REQUEST";
@@ -36,16 +36,19 @@ export const SEARCH_PRODUCT_REQUEST = "SEARCH_PRODUCT_REQUEST";
 export const SEARCH_PRODUCT_SUCCESS = "SEARCH_PRODUCT_SUCCESS";
 export const SEARCH_PRODUCT_FAILURE = "SEARCH_PRODUCT_FAILURE";
 
-
 // Category products action types
 
 export const FETCH_CATEGORY_REQUEST = "FETCH_CATEGORY_REQUEST";
 export const FETCH_CATEGORY_SUCCESS = "FETCH_CATEGORY_SUCCESS";
 export const FETCH_CATEGORY_FAILURE = "FETCH_CATEGORY_FAILURE";
 
+// Filtered products types
+export const FILTERED_CATEGORY_REQUEST = "FILTERED_CATEGORY_REQUEST";
+export const FILTERED_CATEGORY_SUCCESS = "FILTERED_CATEGORY_SUCCESS";
+export const FILTERED_CATEGORY_FAILURE = "FILTERED_CATEGORY_FAILURE";
 
+// options for sidebar filters
 
-
-
-
-
+export const SIDEBAR_FILTERS_REQUEST = "SIDEBAR_FILTERS_REQUEST";
+export const SIDEBAR_FILTERS_SUCCESS = "SIDEBAR_FILTERS_SUCCESS";
+export const SIDEBAR_FILTERS_FAILURE = "SIDEBAR_FILTERS_FAILURE";
