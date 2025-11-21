@@ -10,7 +10,13 @@ function* filterCategorySaga(action) {
     const { categoryName, filters } = action.payload;
 
     const query = new URLSearchParams(filters).toString();
-    const response = yield call(() =>
+    console.log("QUERY RECEIVED BY SAGA:", filters);
+console.log("FINAL QUERY STRING:", query);
+console.log("FINAL URL:", `http://localhost:5000/api/products/${categoryName}/filters?${query}`);
+
+    
+    const response = yield call(() => 
+      
       fetch(
         `http://localhost:5000/api/products/${categoryName}/filters?${query}`,
         {
@@ -23,6 +29,7 @@ function* filterCategorySaga(action) {
     );
 
     const data = yield response.json();
+    console.log("data from filtered product saga..........", data.data)
    
     yield put(filteredCategorySuccess(data.data));
   } catch (error) {

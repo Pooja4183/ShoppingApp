@@ -1,8 +1,7 @@
-import { defaults } from "autoprefixer";
 import { SIDEBAR_FILTERS_REQUEST,SIDEBAR_FILTERS_SUCCESS,SIDEBAR_FILTERS_FAILURE } from "../actions/types";
 
 const initialState = {
-    filtersList:[],
+    list:[],
     loading:false,
     error:null,
 }
@@ -20,7 +19,7 @@ switch (action.type){
         ...state,
        loading:false,
        error:null,
-      filtersList:action.payload,
+      list:action.payload,
     }
 
     case SIDEBAR_FILTERS_FAILURE:
@@ -28,7 +27,7 @@ switch (action.type){
         ...state,
        loading:false,
        error:action.payload,
-       filtersList:[],
+       list:[],
     }
 
     default:

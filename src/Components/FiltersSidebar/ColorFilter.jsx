@@ -1,72 +1,72 @@
 import { useState } from "react";
-import { Search } from "lucide-react";
 
 const ColorFilter = ({ colors = [], onChange }) => {
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [search, setSearch] = useState("");
   const [showAll, setShowAll] = useState(false);
 
-  const filteredColors = colors.filter((c) =>
-    c.name.toLowerCase().includes(search.toLowerCase())
-  );
-  const visibleColors = showAll ? filteredColors : filteredColors.slice(0, 10);
+  const visibleColors = showAll ? colors : colors.slice(0, 7);
+
+  const colorHexMap = {
+    Black: "#2F3640",
+    Blue: "#007BFF",
+    White: "#FFFFFF",
+    Pink: "#FFC0CB",
+    Green: "#28A745",
+    Beige: "#F5F5DC",
+    Red: "#FF4D4D",
+    Peach: "#FFDAB9",
+    "Off white": "#FAF9F6",
+    "Olive green": "#708238",
+    "Neon pink": "#FF6EC7",
+  };
 
   return (
     <div className="border-b pb-4 mb-4">
-      <div className="flex justify-between items-center mb-2">
-        <h3 className="font-semibold text-gray-800 uppercase text-sm">Color</h3>
+      <h3 className="font-semibold text-gray-800 uppercase text-sm mb-3">
+        Color
+      </h3>
 
-        {/* Search Icon Toggle */}
-        <button
-          onClick={() => setSearchOpen(!searchOpen)}
-          className="text-gray-500 hover:text-pink-500"
-        >
-          <Search size={16} />
-        </button>
-      </div>
-
-      {/* Search Input (only visible when icon clicked) */}
-      {searchOpen && (
-        <input
-          type="text"
-          placeholder="Search color"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="border w-full text-sm px-2 py-1 rounded-md mb-2 focus:outline-none focus:ring-1 focus:ring-pink-400"
-        />
-      )}
-
-      {/* Color Options */}
       <div className="space-y-1">
-        {visibleColors.map((color) => (
-          <label
-            key={color.name}
-            className="flex items-center gap-2 text-sm cursor-pointer hover:bg-gray-50 p-1 rounded"
-          >
-            <input
-              type="checkbox"
-              className="accent-pink-500"
-              onChange={() => onChange("color", color.name)}
-            />
-            <span
-              className="w-4 h-4 rounded-full border border-gray-300"
-              style={{ backgroundColor: color.hex }}
-            ></span>
-            <span className="text-gray-700 flex-1">{color.name}</span>
-            {color.count && (
-              <span className="text-gray-400 text-xs">({color.count})</span>
-            )}
-          </label>
-        ))}
+        {visibleColors.length > 0 ? (
+          visibleColors.map((color, index) => (
+            <label
+              key={index}
+              className="flex items-center gap-3 text-sm cursor-pointer hover:bg-gray-50 p-1 rounded"
+            >
+              {/* Larger checkbox */}
+              <input
+                type="checkbox"
+                className="accent-pink-500 w-4 h-4 cursor-pointer"
+                onChange={() => onChange && onChange("color", color)}
+              />
+
+              {/* Color dot */}
+              <span
+                className="w-4 h-4 rounded-full "
+                style={{
+                  backgroundColor: colorHexMap[color] || "#E5E5E5",
+                }}
+              ></span>
+
+              {/* Color name */}
+              <span className="text-gray-700 flex-1">{color}</span>
+
+              {/* Fake count for now */}
+              <span className="text-gray-400 text-xs">
+                ({Math.floor(Math.random() * 40000 + 2000)})
+              </span>
+            </label>
+          ))
+        ) : (
+          <p className="text-gray-400 text-sm">No colors available</p>
+        )}
       </div>
 
-      {/* Show More / Less */}
-      {filteredColors.length > 10 && (
+      {colors.length > 7 && (
         <button
           onClick={() => setShowAll(!showAll)}
           className="text-pink-500 text-sm mt-2 font-medium"
         >
-          {showAll ? "Show Less" : `+ ${filteredColors.length - 10} more`}
+          {showAll ? "Show Less" : `+ ${colors.length - 7} more`}
         </button>
       )}
     </div>
