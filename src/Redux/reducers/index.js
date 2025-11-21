@@ -20,7 +20,7 @@ const rootReducer =combineReducers({
     searchResult:searchProductReducer,
     categoryListProduct:fetchCategoryReducer,
     filterdProduct:filterCategoryReducer,
-    filtersList:sidebarFiltersReducer,
+    filters:sidebarFiltersReducer,
     
 
 

@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { fetchCategoryRequest } from "../Redux/actions/categoryAction";
 import FilterSidebar from "../Components/FiltersSidebar/Index";
 import { filteredCategoryRequest } from "../Redux/actions/filterCategoryAction";
+import { sidebarFiltersRequest } from "../Redux/actions/sidebarFiltersAction";
 
 const ProductDashboard = () => {
   const { search } = useLocation();
@@ -15,19 +16,24 @@ const ProductDashboard = () => {
   const dispatch = useDispatch();
   const { categoryName } = useParams();
 
-  // const searchResults = useSelector((state) => state.searchResult.searchResult);
-
-  const { categoryListProduct, loading } = useSelector(
+// when user clicks on any category from the navbar for example men , men category products will be displayyed.
+  const { categoryListProduct, loading: categoryLoading } = useSelector(
     (state) => state.categoryListProduct
   );
+  
 
-  const { filterdProduct } = useSelector(
-    (state) => state.filterdProduct
+// thesere the filtered products when user clicks on checkbox
+  const filterdProduct = useSelector(
+    (state) => state.filterdProduct.filterdProduct
   );
   console.log("checking if the products available 2:", filterdProduct);
 
-  const filtersData = useSelector((state) => state.filtersList);
-  console.log("filters data 3 ", filtersData);
+  // filters options list available fro the selected category , for example: women
+  const {
+    list: filtersData,
+    loading: filtersLoading,
+    error,
+  } = useSelector((state) => state.filters);
 
   const handleApplyFilters = (categoryName, filters) => {
     dispatch(filteredCategoryRequest(categoryName, filters));
@@ -36,14 +42,10 @@ const ProductDashboard = () => {
   useEffect(() => {
     if (categoryName) {
       dispatch(fetchCategoryRequest(categoryName));
+       dispatch(sidebarFiltersRequest(categoryName));
     } else if (query) {
       dispatch(fetchProductRequest({ search: query }));
-
-      // } else if (filters){
-      //   dispatch(filteredCategoryRequest(filters));
-
-      // } else {
-      dispatch(fetchProductRequest());
+     
     }
   }, [categoryName, query, dispatch]);
 
@@ -52,15 +54,17 @@ const ProductDashboard = () => {
       <div className="flex">
         <div className="w-[250px] hidden xl:block">
           <FilterSidebar
-            onFilterChange={handleApplyFilters}
+             onFilterChange={handleApplyFilters}
             filtersData={filtersData}
+            loading={filtersLoading}
           />
         </div>
         <div className="flex-1">
           <ProductListing
             category={categoryName}
             products={categoryListProduct}
-            loading={loading}
+             filteredProducts={filterdProduct}
+            loading={categoryLoading}
           />
         </div>
       </div>
