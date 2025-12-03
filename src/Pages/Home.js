@@ -7,6 +7,7 @@ import Slideshow from "../Components/Slider";
 import Static1 from "../Components/static1";
 import TodoApp from "../TodoApp";
 import LaunchVideoBanner from "../Components/LaunchVideoBanner_temp";
+import Chat from "../Components/chat/Chat";
 
 
 function Home(){
@@ -20,6 +21,7 @@ function Home(){
         <LaunchVideoBanner/>
         <Static1/>
         <TodoApp/>
+        <Chat/>
         <Footer/>
         </>
     )
