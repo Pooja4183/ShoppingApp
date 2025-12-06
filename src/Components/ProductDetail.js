@@ -19,7 +19,7 @@ function ProductDetail({ isAuthenticated }) {
 
   const handleWishlist = () => {
     const isAlreadywishlist = wishListItems.some(
-      (item) => item.id === productData.id
+      (item) => item._id === productData._id
     );
     if (isAuthenticated) {
       if (isAlreadywishlist) {

@@ -6,7 +6,8 @@ const WishListPage = () => {
  
   const navigate = useNavigate();
 
-  const wishListProduct = useSelector((state)=>state.wishList.wishListItmes)
+  const wishListProduct = useSelector((state)=>state.wishList.wishListItmes);
+
  
   return (
     <>
@@ -16,20 +17,20 @@ const WishListPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-6">
         {wishListProduct.map((item) => (
           <div
-            key={item.id}
+            key={item._id}
             className="bg-white cursor-pointer rounded-xl"
-            onClick={() => navigate("/Prodectdetails/" + item.id)}
+            onClick={() => navigate("/Prodectdetails/" + item._id)}
           >
             <figure className="flex justify-center items-center h-48 overflow-hidden rounded-t-xl">
               <img
-                src={item.image}
+                src={item.images[0].url}
                 alt={item.title}
                 className="h-full object-contain"
               />
             </figure>
 
             <div className="px-3 mt-2 text-left">
-              <p className="text-gray-600 text-xs pb-1">Rating: {item.rating.rate} ★</p>
+              <p className="text-gray-600 text-xs pb-1">Rating:  ★</p>
               <h2 className="card-title text-sm line-clamp-2 mb-2 min-h-[2em]">
                 {item.title}
               </h2>

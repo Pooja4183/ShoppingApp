@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 
 const ProductListing = ({ products = [],filteredProducts, category,loading }) => {
 
-  console.log("product listing props Filtered products:", filteredProducts);
+  
 
   const finalProducts = filteredProducts.length > 0 ? filteredProducts : products;
   return (

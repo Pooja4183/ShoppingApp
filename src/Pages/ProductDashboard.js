@@ -26,7 +26,7 @@ const ProductDashboard = () => {
   const filterdProduct = useSelector(
     (state) => state.filterdProduct.filterdProduct
   );
-  console.log("checking if the products available 2:", filterdProduct);
+ 
 
   // filters options list available fro the selected category , for example: women
   const {

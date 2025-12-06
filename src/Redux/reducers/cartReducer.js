@@ -20,13 +20,13 @@ const cartReducer = (state = intialState, action) => {
     case ADD_TO_CART: {
       const newProduct = action.payload;
       const existingProduct = state.cartProduct.find(
-        (item) => item.id === newProduct.id
+        (item) => item._id === newProduct._id
       );
 
       let updatedCart;
       if (existingProduct) {
         updatedCart = state.cartProduct.map((item) =>
-          item.id === newProduct.id
+          item._id === newProduct._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
@@ -43,7 +43,7 @@ const cartReducer = (state = intialState, action) => {
 
     case INCREMENT_QUANTITY: {
       const updatedCart = state.cartProduct.map((item) =>
-        item.id === action.payload
+        item._id === action.payload
           ? { ...item, quantity: item.quantity + 1 }
           : item
       );
@@ -57,17 +57,17 @@ const cartReducer = (state = intialState, action) => {
 
     case DECREMENT_QUANTITY: {
       const itemToDecrement = state.cartProduct.find(
-        (item) => item.id === action.payload
+        (item) => item._id === action.payload
       );
 
       let updatedCart;
       if (itemToDecrement.quantity === 1) {
         updatedCart = state.cartProduct.filter(
-          (item) => item.id !== action.payload
+          (item) => item._id !== action.payload
         );
       } else {
         updatedCart = state.cartProduct.map((item) =>
-          item.id === action.payload
+          item._id === action.payload
             ? { ...item, quantity: item.quantity - 1 }
             : item
         );
@@ -82,7 +82,7 @@ const cartReducer = (state = intialState, action) => {
 
     case REMOVE_FROM_CART: {
       const updatedCart = state.cartProduct.filter(
-        (item) => item.id !== action.payload
+        (item) => item._id !== action.payload
       );
 
       return {
