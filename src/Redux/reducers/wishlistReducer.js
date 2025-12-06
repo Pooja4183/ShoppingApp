@@ -4,39 +4,40 @@ import {
 } from "../actions/wishListAction";
 
 const intialState = {
-  wishListItmes : JSON.parse(localStorage.getItem('wishList')) || [],
+  wishListItmes: [],
 };
 
 const wishlistReducer = (state = intialState, action) => {
   switch (action.type) {
+    // add item to wishlist
     case ADD_TO_WISHLIST: {
       const newProduct = action.payload;
+
+  // Check if product already exists in wishlist
       const existingProduct = state.wishListItmes.find(
-        (item) => item.id === newProduct.id
+        (item) => item._id === newProduct._id
       );
 
-      let updatedCart;
       if (existingProduct) {
-        return state;
-      } else {
-        updatedCart = [...state.wishListItmes, { ...newProduct, quantity: 1 }];
-         localStorage.setItem("wishList", JSON.stringify(updatedCart));
-      }
+        return state; // no duplicate
+      };
+      // } else {
+      //   updatedCart = [...state.wishListItmes, { ...newProduct, quantity: 1 }];
+      //   localStorage.setItem("wishList", JSON.stringify(updatedCart));
+      // }
 
       return {
         ...state,
-        wishListItmes: updatedCart,
+        wishListItmes: [...state.wishListItmes, newProduct],
       };
     }
+// Remove itme from wishlist
     case REMOVE_FROM_WISHLIST: {
-      
-      const updatedCart = state.wishListItmes.filter(
-        (item) => item.id !== action.payload
-      );
-
       return {
         ...state,
-        wishListItmes: updatedCart,
+        wishListItmes:state.wishListItmes.filter(
+        (item) => item._id !== action.payload
+      ),
       };
     }
 

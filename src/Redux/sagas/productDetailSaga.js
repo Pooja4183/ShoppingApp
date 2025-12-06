@@ -8,7 +8,9 @@ function* fetchProductIdSaga(action) {
         const response = yield call(() =>
             fetch(`http://localhost:5000/api/products/${action.payload}`));
         const data = yield response.json();
-        yield put(fetchProductIdSuccess(data));
+        yield put(fetchProductIdSuccess(data.product));
+        
+       
 
     } catch (error) {
         yield put(fetchProductIdFailure(error.message));

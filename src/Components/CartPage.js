@@ -7,7 +7,8 @@ const CartPage = () => {
 
 const dispatch = useDispatch();
 const cartItems = useSelector((state)=>state.cart.cartProduct);
-const totalPrice = useSelector((state)=>state.cart.totalPrice)
+const totalPrice = useSelector((state)=>state.cart.totalPrice);
+
 
   return (
     <>
@@ -15,20 +16,20 @@ const totalPrice = useSelector((state)=>state.cart.totalPrice)
         <h2 className="cart-title">Shopping Cart</h2>
         <div className="cart-items-section">
           {cartItems.map((item) => (
-            <div className="cart-item" key={item.id}>
-              <img src={item.image} alt="Product" className="item-image" />
+            <div className="cart-item" key={item._id}>
+              <img src={item.images && item.images.length >0 ? item.images[0].url:""} alt="Product" className="item-image" />
               <div className="item-details">
                 <h4>{item.title}</h4>
                 <p>Price: {item.price}</p>
                 <div className="quantity-controls">
-                  <button className="qty-btn" onClick={()=>dispatch(decrementQuantity(item.id))}>
+                  <button className="qty-btn" onClick={()=>dispatch(decrementQuantity(item._id))}>
                     -
                   </button>
                   <span>{item.quantity}</span>
-                  <button className="qty-btn" onClick={()=>dispatch(incrementQuantity(item.id))}>+</button>
+                  <button className="qty-btn" onClick={()=>dispatch(incrementQuantity(item._id))}>+</button>
                 </div>
               </div>
-              <button className="remove-btn" onClick={()=>dispatch(removeFromCart(item.id))}>Remove</button>
+              <button className="remove-btn" onClick={()=>dispatch(removeFromCart(item._id))}>Remove</button>
             </div>
           ))}
         </div>
