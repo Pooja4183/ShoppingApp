@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Footer from "./Footer";
+import Footer from "../Components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductIdRequest } from "../Redux/actions/productDetailAction";
 import { addToCart } from "../Redux/actions/cartActions";
