@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Pages/Home";
-import ProductDetail from "./Components/ProductDetail";
-import CartPage from "./Components/CartPage";
+import ProductDetail from "./Pages/ProductDetail";
+import CartPage from "./Pages/CartPage";
 import WishListPage from "./Components/WishListPage";
 import Profile from "./Pages/Profile";
 import AuthForm from "./Pages/AuthForm";
@@ -10,6 +10,7 @@ import VerifyOtp from "./Pages/VerifyOtp";
 import AdminProductForm from "./Pages/AdminProductForm";
 import Header from "./Components/Header";
 import ProductDashboard from "./Pages/ProductDashboard";
+import AddressPage from "./Pages/AddressPage";
 
 function MainApp() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -40,6 +41,7 @@ function MainApp() {
           }
         />
         <Route path="/cart" element={<CartPage />} />
+         <Route path="/address" element={<AddressPage/>} />
         <Route path="admin-form" element={<AdminProductForm />} />
       </Routes>
     </>
