@@ -73,7 +73,7 @@ function ProductDetail({ isAuthenticated }) {
             {productData.title}
           </h2>
           <p style={{ color: "#666", marginBottom: "20px" }}>
-            {productData.category}
+            {/* {productData.categoryDetails.categoryName} */}
           </p>
 
           <p
