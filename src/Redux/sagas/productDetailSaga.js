@@ -9,6 +9,7 @@ function* fetchProductIdSaga(action) {
             fetch(`http://localhost:5000/api/products/${action.payload}`));
         const data = yield response.json();
         yield put(fetchProductIdSuccess(data.product));
+        console.log("from the produt detail saga:", data.product)
         
        
 

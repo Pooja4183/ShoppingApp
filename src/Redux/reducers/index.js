@@ -9,6 +9,7 @@ import searchProductReducer from './searchProductReducer';
 import fetchCategoryReducer from './categoryReducer'
 import filterCategoryReducer from './filterCategoryReducer';
 import sidebarFiltersReducer from './sidebarFiltersReducer';
+import fetchAddressListReducer from './addressReducer';
 
 const rootReducer =combineReducers({
     products:productReducer, // this becomes state.prodcuts
@@ -21,6 +22,7 @@ const rootReducer =combineReducers({
     categoryListProduct:fetchCategoryReducer,
     filterdProduct:filterCategoryReducer,
     filters:sidebarFiltersReducer,
+    addressList:fetchAddressListReducer,
     
 
 

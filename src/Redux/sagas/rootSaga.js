@@ -8,6 +8,7 @@ import searchProductWatcher from './searchProductSaga';
 import fetchCategoryWatcher from './categorySaga';
 import filterCategoryWatcher from './filterCategorySaga';
 import sidebarFilterWatcher from './sidebarFilterSaga';
+import fetchAddressListWatcher from './addressSaga';
 
 export default function* rootSaga(){
     yield all([ 
@@ -20,6 +21,8 @@ export default function* rootSaga(){
         fetchCategoryWatcher(),
         filterCategoryWatcher(),
         sidebarFilterWatcher(),
+        fetchAddressListWatcher(),
+        fetchAddressListWatcher(),
 
     ]);
 }
