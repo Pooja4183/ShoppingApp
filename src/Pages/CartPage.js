@@ -190,7 +190,6 @@ const CartPage = () => {
                     if (!token) {
                       navigate("/login");
                     } else {
-                      
                       navigate("/address");
                     }
                   }}

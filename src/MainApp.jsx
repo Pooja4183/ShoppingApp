@@ -11,6 +11,7 @@ import AdminProductForm from "./Pages/AdminProductForm";
 import Header from "./Components/Header";
 import ProductDashboard from "./Pages/ProductDashboard";
 import AddressPage from "./Pages/AddressPage";
+import PaymentPage from "./Pages/PaymentPage";
 
 function MainApp() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -42,6 +43,7 @@ function MainApp() {
         />
         <Route path="/cart" element={<CartPage />} />
          <Route path="/address" element={<AddressPage/>} />
+         <Route path="payment" element={<PaymentPage/>}/>
         <Route path="admin-form" element={<AdminProductForm />} />
       </Routes>
     </>
