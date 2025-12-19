@@ -2,18 +2,23 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaHome } from "react-icons/fa";
 import { fetchAddressRequest } from "../Redux/actions/addressAction";
+import { useNavigate } from "react-router-dom"; // navigation to payment page
 
 const Address = () => {
   const { addressList } = useSelector((state) => state.addressList);
+
+  // stores the currently selected address id
   const [selectedAddressId, setSelectedAddressId] = useState(null);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate(); 
 
+  // Fetch all addresses of logged-in user on page load
   useEffect(() => {
     dispatch(fetchAddressRequest());
   }, [dispatch]);
 
-  // Auto-select default address
+  // Auto-select first address as default when address list loads
   useEffect(() => {
     if (addressList?.length > 0) {
       setSelectedAddressId(addressList[0]._id);
@@ -23,42 +28,29 @@ const Address = () => {
   const defaultAddress = addressList?.[0];
   const otherAddresses = addressList?.slice(1) || [];
 
+  // Reusable action buttons (Edit / Remove)
   const ActionButtons = () => (
     <div className="flex gap-4 mt-4">
-      <button
-        className="
-          px-6 py-2
-          border border-gray-800
-          text-gray-900
-          text-xs
-          font-semibold
-          tracking-widest
-          uppercase
-          rounded
-          hover:bg-gray-100
-          transition
-        "
-      >
+      <button className="px-6 py-2 border border-gray-800 text-gray-900 text-xs font-semibold tracking-widest uppercase rounded hover:bg-gray-100 transition">
         REMOVE
       </button>
-      <button
-        className="
-          px-6 py-2
-          border border-gray-800
-          text-gray-900
-          text-xs
-          font-semibold
-          tracking-widest
-          uppercase
-          rounded
-          hover:bg-gray-100
-          transition
-        "
-      >
+      <button className="px-6 py-2 border border-gray-800 text-gray-900 text-xs font-semibold tracking-widest uppercase rounded hover:bg-gray-100 transition">
         EDIT
       </button>
     </div>
   );
+
+  // Handle CONTINUE button click
+  // Navigates to payment page with selected address id
+  const handleContinue = () => {
+    if (!selectedAddressId) return;
+
+    navigate("/payment", {
+      state: {
+        selectedAddressId, // freeze address for payment
+      },
+    });
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -189,7 +181,17 @@ const Address = () => {
             DELIVERY ESTIMATES
           </h3>
 
-          <button className="mt-6 w-full bg-pink-600 text-white font-semibold py-3 rounded hover:bg-pink-700 transition">
+          {/* Continue button triggers payment flow */}
+          <button
+            className={`mt-6 w-full py-3 rounded font-semibold transition
+              ${
+                selectedAddressId
+                  ? "bg-pink-600 text-white hover:bg-pink-700"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              }`}
+            disabled={!selectedAddressId}
+            onClick={handleContinue}
+          >
             CONTINUE
           </button>
         </div>
