@@ -177,6 +177,13 @@ Component  →  dispatch(action)
        ↓
 🔍 Component (reads state using useSelector)
 
+// order process 
+Cart
+ → Address (CREATE ORDER)
+ → Payment Method (CREATE PAYMENT)
+ → Razorpay / COD
+ → Order Success
 
 
 
+Component → Action → Saga → Action → Reducer → Store → Component

@@ -1,11 +1,11 @@
 import AppLogo from "./AppLogo";
-import AddToCart from "./AddtoCart";
+import AddToCart from "./orderProcess/AddtoCart";
 import AddToWishlistHeader from "./AddToWishlistHeader";
 import ProfileHeader from "./ProfileHeader";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { searchProductRequest } from "../Redux/actions/searchProductAaction";
+import { searchProductRequest } from "../Redux/searchProduct/searchProductAaction";
 import useDebounce from "../CustomHooks.js/useDebounce";
 
 function Header() {

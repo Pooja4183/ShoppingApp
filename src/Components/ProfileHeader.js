@@ -2,7 +2,7 @@ import { FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { logout } from "../Redux/actions/authActions";
+import { logout } from "../Redux/auth/authActions";
 
 function ProfileHeader() {
   const isAuthenticated = useSelector((state)=>state.auth.isAuthenticated);

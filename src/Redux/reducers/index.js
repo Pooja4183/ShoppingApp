@@ -1,15 +1,17 @@
 import {combineReducers} from 'redux';
-import productReducer from './productReducer';
-import product_IdReducer from './product_IdReducer';
-import cartReducer from './cartReducer';
-import wishlistReducer from './wishlistReducer';
-import authReducer from './authReducer';
-import OtpReducer from './OtpReducer';
-import searchProductReducer from './searchProductReducer';
-import fetchCategoryReducer from './categoryReducer'
-import filterCategoryReducer from './filterCategoryReducer';
-import sidebarFiltersReducer from './sidebarFiltersReducer';
-import fetchAddressListReducer from './addressReducer';
+import productReducer from '../Products/productReducer';
+import product_IdReducer from '../productDetail/product_IdReducer';
+import cartReducer from '../cart/cartReducer';
+import wishlistReducer from '../wishList/wishlistReducer';
+import authReducer from '../auth/authReducer';
+import OtpReducer from '../otp/OtpReducer';
+import searchProductReducer from '../searchProduct/searchProductReducer';
+import fetchCategoryReducer from '../category/categoryReducer'
+import filterCategoryReducer from '../filteredCategory/filterCategoryReducer';
+import sidebarFiltersReducer from '../sidebarFilters/sidebarFiltersReducer';
+import fetchAddressListReducer from '../address/addressReducer';
+import orderReducer from '../order/orderReducer';
+import { paymentReducer } from '../payment/payment.reducer';
 
 const rootReducer =combineReducers({
     products:productReducer, // this becomes state.prodcuts
@@ -23,6 +25,8 @@ const rootReducer =combineReducers({
     filterdProduct:filterCategoryReducer,
     filters:sidebarFiltersReducer,
     addressList:fetchAddressListReducer,
+    order:orderReducer,
+    payment:paymentReducer
     
 
 

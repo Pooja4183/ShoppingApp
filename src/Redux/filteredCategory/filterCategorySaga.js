@@ -1,0 +1,44 @@
+import { FILTERED_CATEGORY_REQUEST } from "./types";
+import { takeLatest, call, put } from "redux-saga/effects";
+import {
+  filteredCategorySuccess,
+  filteredCategoryFailure,
+} from "./filterCategoryAction";
+
+function* filterCategorySaga(action) {
+  try {
+    const { categoryName, filters } = action.payload;
+
+    const query = new URLSearchParams(filters).toString();
+    console.log("QUERY RECEIVED BY SAGA:", filters);
+console.log("FINAL QUERY STRING:", query);
+console.log("FINAL URL:", `${process.env.REACT_APP_BASE_URL}/products/${categoryName}/filters?${query}`);
+
+    
+    const response = yield call(() => 
+      
+      fetch(
+        `${process.env.REACT_APP_BASE_URL}/products/${categoryName}/filters?${query}`,
+        {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      )
+    );
+
+    const data = yield response.json();
+    console.log("data from filtered product saga..........", data.data)
+   
+    yield put(filteredCategorySuccess(data.data));
+  } catch (error) {
+    yield put(filteredCategoryFailure(error.message));
+  }
+}
+
+function* filterCategoryWatcher() {
+  yield takeLatest(FILTERED_CATEGORY_REQUEST, filterCategorySaga);
+}
+
+export default filterCategoryWatcher;

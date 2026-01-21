@@ -1,0 +1,5 @@
+
+// Address list action types
+export const ADDRESS_LIST_REQUEST = "ADDRESS_LIST_REQUEST";
+export const ADDRESS_LIST_SUCCESS = "ADDRESS_LIST_SUCCESS";
+export const ADDRESS_LIST_FAILURE = "ADDRESS_LIST_FAILURE";
