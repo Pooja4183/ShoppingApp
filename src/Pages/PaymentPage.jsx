@@ -1,4 +1,4 @@
-import Payment from "../Components/Payment";
+import Payment from "../Components/orderProcess/Payment";
 import Footer from "../Components/Footer"
 
 const PaymentPage = ()=>{

@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchProductRequest } from "../Redux/actions/productFetchActions";
+import { fetchProductRequest } from "../Redux/Products/productFetchActions";
 
 const NewArrivals = () => {
 const { products } = useSelector((state) => state.products);
+
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,7 +19,8 @@ const { products } = useSelector((state) => state.products);
       <h2 className="text-2xl font-bold mb-4">New Arrivals</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-6">
-        {products.slice(0, 6).map((item) => (
+        {Array.isArray(products) &&
+        products.slice(0, 6).map((item) => (
           <div
             key={item._id}
             className="bg-white cursor-pointer rounded-xl"
