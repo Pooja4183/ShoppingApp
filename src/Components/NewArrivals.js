@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchProductRequest } from "../Redux/Products/productFetchActions";
+import { useLocation } from "react-router-dom";
 
 const NewArrivals = () => {
 const { products } = useSelector((state) => state.products);
@@ -11,7 +12,10 @@ const { products } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
   useEffect(() => {
-     dispatch(fetchProductRequest());
+    if(!window.location.search){
+        dispatch(fetchProductRequest({}))
+    }
+   
    }, [dispatch]);
 
   return (

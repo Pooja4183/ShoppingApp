@@ -30,3 +30,12 @@ code {
   background: rgba(203, 205, 205, 0.2) !important; 
 }
 
+select {
+  color: black !important;
+  background-color: white !important;
+}
+
+select option {
+  color: black !important;
+  background-color: white !important;
+}

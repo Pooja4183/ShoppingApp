@@ -4,13 +4,13 @@ import productIdSaga from '../productDetail/productDetailSaga';
 import watchAuthSaga from '../auth/authSaga';
 import watchOtpSaga from '../otp/otpSaga';
 import upload_ProductSaga from '../uploadProduct/productUploadSaga';
-import searchProductWatcher from '../searchProduct/searchProductSaga';
 import fetchCategoryWatcher from '../category/categorySaga';
 import filterCategoryWatcher from '../filteredCategory/filterCategorySaga';
 import sidebarFilterWatcher from '../sidebarFilters/sidebarFilterSaga';
 import fetchAddressListWatcher from '../address/addressSaga';
 import order_WatcherSaga from '../order/orderSaga';
 import paymentWatcherSaga from '../payment/payment.saga';
+import { watchOrderList } from "../orderList/orderListSaga";
 
 export default function* rootSaga(){
     yield all([ 
@@ -19,13 +19,14 @@ export default function* rootSaga(){
         watchAuthSaga(),
         watchOtpSaga(),
         upload_ProductSaga(),
-        searchProductWatcher(),
-        fetchCategoryWatcher(),
-        filterCategoryWatcher(),
+        // fetchCategoryWatcher(),
+        // filterCategoryWatcher(),
         sidebarFilterWatcher(),
         fetchAddressListWatcher(),
         order_WatcherSaga(),
         paymentWatcherSaga(),
+         watchOrderList(),
+
 
     ]);
 }

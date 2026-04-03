@@ -22,4 +22,4 @@ export const createOrderFailure = (error) => ({
 
 export const resetOrderState = ()=>({
   type:RESET_ORDER_STATE,
-})
+});

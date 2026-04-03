@@ -9,7 +9,7 @@ const Address = () => {
   const { addressList } = useSelector((state) => state.addressList);
   const { order, success } = useSelector((state) => state.order);
   const cartItems = useSelector((state) => state.cart.cartProduct);
-  const totalPrice = useSelector((state) => state.cart.totalPrice);
+  // const totalPrice = useSelector((state) => state.cart.totalPrice);
 
   // stores the currently selected address id
   const [selectedAddressId, setSelectedAddressId] = useState(null);
@@ -39,12 +39,12 @@ useEffect(() => {
   const items = cartItems.map((item) => {
     let productId = item._id;
     let quantity = item.quantity;
-    let price = item.price;
+   
 
     return {
       productId,
       quantity,
-      price,
+ 
     };
   });
 
@@ -72,7 +72,7 @@ useEffect(() => {
       createOrderRequest({
         addressId: selectedAddressId,
         items: items,
-        totalAmount: totalPrice,
+        // totalAmount: totalPrice,
       })
     );
   };

@@ -18,8 +18,8 @@ const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        success:false,
-        error:null
+        success: false,
+        error: null,
       };
 
     case CREATE_ORDER_SUCCESS:
@@ -27,8 +27,8 @@ const orderReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         order: action.payload,
-        success:true,
-        error:null
+        success: true,
+        error: null,
       };
 
     case CREATE_ORDER_FAILURE:
@@ -36,20 +36,19 @@ const orderReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
         loading: false,
-        success:false,
+        success: false,
       };
 
-      case RESET_ORDER_STATE:
+    case RESET_ORDER_STATE:
       return {
-        loading:false,
-        success:false,
-        order:null,
-        error:null
-
+        loading: false,
+        success: false,
+        order: null,
+        error: null,
       };
 
-      default:
-        return state;
+    default:
+      return state;
   }
 };
 
