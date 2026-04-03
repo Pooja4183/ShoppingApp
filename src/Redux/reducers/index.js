@@ -5,13 +5,14 @@ import cartReducer from '../cart/cartReducer';
 import wishlistReducer from '../wishList/wishlistReducer';
 import authReducer from '../auth/authReducer';
 import OtpReducer from '../otp/OtpReducer';
-import searchProductReducer from '../searchProduct/searchProductReducer';
 import fetchCategoryReducer from '../category/categoryReducer'
 import filterCategoryReducer from '../filteredCategory/filterCategoryReducer';
 import sidebarFiltersReducer from '../sidebarFilters/sidebarFiltersReducer';
 import fetchAddressListReducer from '../address/addressReducer';
 import orderReducer from '../order/orderReducer';
 import { paymentReducer } from '../payment/payment.reducer';
+import orderListReducer from "../orderList/orderListReducer";
+
 
 const rootReducer =combineReducers({
     products:productReducer, // this becomes state.prodcuts
@@ -20,15 +21,13 @@ const rootReducer =combineReducers({
     wishList:wishlistReducer,
     auth:authReducer,
     otp:OtpReducer,
-    searchResult:searchProductReducer,
     categoryListProduct:fetchCategoryReducer,
     filterdProduct:filterCategoryReducer,
     filters:sidebarFiltersReducer,
     addressList:fetchAddressListReducer,
     order:orderReducer,
-    payment:paymentReducer
-    
-
+    payment:paymentReducer,
+    orderList: orderListReducer,
 
 });
 

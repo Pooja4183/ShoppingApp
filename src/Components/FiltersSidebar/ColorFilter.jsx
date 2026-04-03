@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ColorFilter = ({ colors = [], onChange }) => {
+const ColorFilter = ({ colors = [], onChange, selected = [] }) => {
   const [showAll, setShowAll] = useState(false);
 
   const visibleColors = showAll ? colors : colors.slice(0, 7);
@@ -19,6 +19,20 @@ const ColorFilter = ({ colors = [], onChange }) => {
     "Neon pink": "#FF6EC7",
   };
 
+  const handleColorChange = (colorName) => {
+    let updatedColors;
+
+    if (selected.includes(colorName)) {
+      updatedColors = selected.filter((c) => c !== colorName);
+    } else {
+      updatedColors = [...selected, colorName];
+    }
+
+    onChange({
+      color: updatedColors,
+    });
+  };
+
   return (
     <div className="border-b pb-4 mb-4">
       <h3 className="font-semibold text-gray-800 uppercase text-sm mb-3">
@@ -27,35 +41,44 @@ const ColorFilter = ({ colors = [], onChange }) => {
 
       <div className="space-y-1">
         {visibleColors.length > 0 ? (
-          visibleColors.map((color, index) => (
-            <label
-              key={index}
-              className="flex items-center gap-3 text-sm cursor-pointer hover:bg-gray-50 p-1 rounded"
-            >
-              {/* Larger checkbox */}
-              <input
-                type="checkbox"
-                className="accent-pink-500 w-4 h-4 cursor-pointer"
-                onChange={() => onChange && onChange("color", color)}
-              />
+          visibleColors.map((colorObj, index) => {
+            const name =
+              typeof colorObj === "object"
+                ? colorObj.name
+                : colorObj;
 
-              {/* Color dot */}
-              <span
-                className="w-4 h-4 rounded-full "
-                style={{
-                  backgroundColor: colorHexMap[color] || "#E5E5E5",
-                }}
-              ></span>
+            const count =
+              typeof colorObj === "object"
+                ? colorObj.count
+                : 0;
 
-              {/* Color name */}
-              <span className="text-gray-700 flex-1">{color}</span>
+            return (
+              <label
+                key={index}
+                className="flex items-center gap-3 text-sm cursor-pointer hover:bg-gray-50 p-1 rounded"
+              >
+                <input
+                  type="checkbox"
+                  className="accent-pink-500 w-4 h-4 cursor-pointer"
+                  checked={selected.includes(name)}
+                  onChange={() => handleColorChange(name)}
+                />
 
-              {/* Fake count for now */}
-              <span className="text-gray-400 text-xs">
-                ({Math.floor(Math.random() * 40000 + 2000)})
-              </span>
-            </label>
-          ))
+                <span
+                  className="w-4 h-4 rounded-full border"
+                  style={{
+                    backgroundColor: colorHexMap[name] || "#E5E5E5",
+                  }}
+                ></span>
+
+                <span className="text-gray-700 flex-1">{name}</span>
+
+                <span className="text-gray-400 text-xs">
+                  ({count})
+                </span>
+              </label>
+            );
+          })
         ) : (
           <p className="text-gray-400 text-sm">No colors available</p>
         )}

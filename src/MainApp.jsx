@@ -13,6 +13,8 @@ import ProductDashboard from "./Pages/ProductDashboard";
 import AddressPage from "./Pages/AddressPage";
 import PaymentPage from "./Pages/PaymentPage";
 import OrderSuccessPage from "./Pages/OrderSuccessPage";
+import OrderDetail from "./Components/profile/orderDetail";
+import Products from "./Pages/admin/pages/products";
 
 function MainApp() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -21,13 +23,13 @@ function MainApp() {
     <>
       <Header />
 
-      {/* Routes */}
       <Routes>
         {/* Product related routes */}
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductDashboard />} />
+
         <Route path="/search" element={<ProductDashboard />} />
-        <Route path="/category/:categoryName" element={<ProductDashboard />} />
+
         <Route
           path="/Prodectdetails/:id"
           element={<ProductDetail isAuthenticated={isAuthenticated} />}
@@ -38,20 +40,30 @@ function MainApp() {
         <Route path="/login" element={<AuthForm mode="login" />} />
         <Route path="/signup" element={<AuthForm mode="signup" />} />
         <Route path="/contact-us" element={<Profile />} />
+
+        {/* ✅ ADDED PROFILE PROTECTED ROUTE */}
+        <Route
+          path="/profile/*"
+          element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
+        />
+
         <Route
           path="/wishlist"
           element={
             isAuthenticated ? <WishListPage /> : <Navigate to="/login" />
           }
         />
+
         {/* Order flow routes */}
         <Route path="/cart" element={<CartPage />} />
         <Route path="/address" element={<AddressPage />} />
         <Route path="/payment/:orderId" element={<PaymentPage />} />
-        <Route path="/order-success/:orderId" element={<OrderSuccessPage/>}/>
+        <Route path="/order-success/:orderId" element={<OrderSuccessPage />} />
+        <Route path="/order/:orderId" element={<OrderDetail />} />
 
-        {/* Admin routes to add the product */}
-        <Route path="/admin-form" element={<AdminProductForm />} />
+        {/* Admin routes */}
+        <Route path="/admin/products/create" element={<Products />} />
+
       </Routes>
     </>
   );

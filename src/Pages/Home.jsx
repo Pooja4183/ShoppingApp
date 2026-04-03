@@ -5,7 +5,7 @@ import Offer from "../Components/offer";
 import PromoCarousel from "../Components/PromoCarousel";
 import Slideshow from "../Components/Slider";
 import Static1 from "../Components/static1";
-import TodoApp from "../TodoApp";
+// import TodoApp from "../TodoApp";
 import LaunchVideoBanner from "../Components/LaunchVideoBanner_temp";
 import Chat from "../Components/chat/Chat";
 
@@ -20,7 +20,7 @@ function Home(){
         <Offer/>
         <LaunchVideoBanner/>
         <Static1/>
-        <TodoApp/>
+        {/* <TodoApp/> */}
         <Chat/>
         <Footer/>
         </>

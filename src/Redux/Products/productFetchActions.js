@@ -1,8 +1,9 @@
 import {FETCH_PRODUCT_REQUEST,FETCH_PRODUCT_SUCCESS,FETCH_PRODUCT_FAILURE} from './types'
 
 //Action creators
-export const fetchProductRequest =()=>({
+export const fetchProductRequest =(action)=>({
     type:  FETCH_PRODUCT_REQUEST,
+    payload: action
 });
 
 export const fetchProductSuccess = (products)=>({

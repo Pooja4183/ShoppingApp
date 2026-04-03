@@ -5,8 +5,8 @@ import ProfileHeader from "./ProfileHeader";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { searchProductRequest } from "../Redux/searchProduct/searchProductAaction";
 import useDebounce from "../CustomHooks.js/useDebounce";
+import { fetchProductRequest } from "../Redux/Products/productFetchActions";
 
 function Header() {
   const [query, setQuery] = useState("");
@@ -14,17 +14,17 @@ function Header() {
   const debouncedInputValue = useDebounce(query, 300);
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const searchResult = useSelector(
-    (state) => state.searchResult.searchResult || []
-  );
+  const searchResult = useSelector((state) => state.product.products || []);
 
   console.log("search list", searchResult);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (debouncedInputValue) {
-      dispatch(searchProductRequest(debouncedInputValue)); // Fetch suggestions based on the query
+    const trimmed = debouncedInputValue?.trim();
+    if (trimmed) {
+      dispatch(fetchProductRequest({ search: trimmed })); // Fetch suggestions based on the query
+
       setshowDropDown(true);
     } else {
       setshowDropDown(false); // clear suggestions
@@ -58,20 +58,29 @@ function Header() {
           <Link to="/" className="mr-4">
             <AppLogo />
           </Link>
-          <Link to="category/women" className="text-sm font-medium hover:text-pink-500">
+          <Link
+            to="/products?category=women"
+            className="text-sm font-medium hover:text-pink-500"
+          >
             WOMEN
           </Link>
-          <Link to="category/men" className="text-sm font-medium hover:text-pink-500">
+
+          <Link
+            to="/products?category=men"
+            className="text-sm font-medium hover:text-pink-500"
+          >
             MEN
           </Link>
+
           <Link
-            to="category/home-decore"
+            to="/products?category=home-decore"
             className="text-sm font-medium hover:text-pink-500"
           >
             HOME DECORE
           </Link>
+
           <Link
-            to="category/beauty"
+            to="/products?category=beauty"
             className="text-sm font-medium hover:text-pink-500"
           >
             BEAUTY
