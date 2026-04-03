@@ -102,46 +102,61 @@ const ProductDashboard = () => {
   }, [search, dispatch]); // 🔥 KEY DEPENDENCY
 
   return (
-    <>
-      <div className="px-6 pt-4">
-        <h2 className="text-base font-semibold text-gray-800">
-          {category || "Products"}{" "}
-          <span className="text-gray-500 font-normal">
-            - {pagination?.total || 0} items
-          </span>
-        </h2>
-      </div>
-      <div className="flex justify-end px-6 py-4">
-        <SortDropdown sort={sort} />
-      </div>
-      <div className="flex">
-        {/* Sidebar */}
-        <div className="w-[250px] hidden xl:block">
-          <FilterSidebar
-            onFilterChange={handleApplyFilters}
-            filtersData={filtersData}
-            loading={filtersLoading}
-            selectedFilters={{
-              brand,
-              color,
-              priceMin,
-              priceMax,
-            }}
-          />
-        </div>
+  <>
+    {/* Header */}
+    <div className="w-full px-3 xl:px-6 pt-4">
+      <h2 className="text-lg font-semibold text-gray-800">
+        {category || "Products"}
+        <span className="ml-2 text-gray-500 font-normal text-sm">
+          ({pagination?.total || 0} items)
+        </span>
+      </h2>
+    </div>
 
-        {/* Product Listing */}
+    {/* Sort */}
+    <div className="w-full px-3 xl:px-6 flex justify-end py-2">
+      <SortDropdown sort={sort} />
+    </div>
 
-        <div className="flex-1">
-          <ProductListing products={products} loading={loading} />
-        </div>
-      </div>
+    {/* Main Layout */}
+   <div className="w-full px-2 xl:px-4 flex gap-4">
 
-      <Pagination currentPage={page} totalPages={pagination?.totalPages} />
+  {/* Sidebar */}
+  <div className="w-[220px] hidden xl:block flex-shrink-0">
+    <div className="sticky top-20">
+      <FilterSidebar
+        onFilterChange={handleApplyFilters}
+        filtersData={filtersData}
+        loading={filtersLoading}
+        selectedFilters={{
+          brand,
+          color,
+          priceMin,
+          priceMax,
+        }}
+      />
+    </div>
+  </div>
 
-      <Footer />
-    </>
-  );
+  {/* Product Listing */}
+  <div className="flex-1 min-w-0">
+    <ProductListing products={products} loading={loading} />
+  </div>
+
+</div>
+
+    {/* Pagination */}
+    <div className="mt-6 flex justify-center">
+      <Pagination
+        currentPage={page}
+        totalPages={pagination?.totalPages}
+      />
+    </div>
+
+    {/* Footer */}
+    <Footer />
+  </>
+);
 };
 
 export default ProductDashboard;
